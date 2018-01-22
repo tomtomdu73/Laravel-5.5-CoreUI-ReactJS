@@ -62,7 +62,7 @@ class CoinsTable extends Component {
     getCoinImage(symbol){
 
         //Symbol errors 
-        if(symbol == "MIOTA") symbol = "IOT" ;
+        if(symbol == "MIOTA"){symbol = "IOT";}
 
         try{
             const img = CRYPTOCOMPARE_API_URL+this.state.crytocompareData[symbol]['ImageUrl']
@@ -79,7 +79,6 @@ class CoinsTable extends Component {
     }
 
     componentDidMount(){
-
         this.getCoins();
         this.getCoinData();
         this.interval = setInterval(this.getCoins.bind(this), UPDATE_INTERVAL);
@@ -92,13 +91,16 @@ class CoinsTable extends Component {
 
     renderCoins() {
 
-        return this.state.coinmarketcapData.map(coin => {
+        if(this.state.coinmarketcapData instanceof Array){
 
-            const symbol = coin.symbol;
-            const img = this.getCoinImage(symbol);
-            return <CoinItem key={coin.name} data = {coin} image = {img} />
+            return this.state.coinmarketcapData.map(coin => {
 
-        })
+                const symbol = coin.symbol;
+                const img = this.getCoinImage(symbol);
+                return <CoinItem key={coin.name} data = {coin} image = {img} />
+
+            })
+        }
     }
 
     render() {
