@@ -1,29 +1,13 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
- 
+import CryptoTable from './CryptoTable.js';
+
 /* An example React component */
 class Main extends Component {
+
     render() {
         return (
-            <div>
-                <h3>All Coins</h3>
-                <table className="table table-hover">
-                    <thead>
-                      <tr>
-                        <td>Rank</td>
-                        <td>Name</td>
-                        <td>Symbol</td>
-                        <td>Price (USD)</td>
-                        <td>1H</td>
-                        <td>1D</td>
-                        <td>1W</td>
-                        <td>Market Cap (USD)</td>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                  </table>
-            </div>
+            <CryptoTable></CryptoTable>
         );
     }
 }
