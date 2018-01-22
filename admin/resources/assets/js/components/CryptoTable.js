@@ -8,27 +8,77 @@ const UPDATE_INTERVAL = 60*1000;
 /* An example React component */
 class CryptoTable extends Component {
 
+    constructor(props){
+        super(props)
+        this.state = {
+            requestFailed : false
+        }
+    }
+
     componentDidMount(){
+
         //AJAX request n1
-        fetch(CRYPTOCOMPARE_API_URL)
-            .then(d => d.json())
-            .then(d => {
-                this.setState({
-                    crytocompareData : d
-                })
-            })
+        // fetch(CRYPTOCOMPARE_API_URL + "/api/data/coinlist")
+        //     .then(response => {
+        //         if(response["Type"] != 100){
+        //             throw Error("Network request failed");
+        //         }
+
+        //         return response.json();
+        //     })
+        //     .then(d => {
+        //         this.setState({
+        //             crytocompareData : d
+        //         });
+        //         console.log(d);
+        //     }), () => {
+        //         this.setState({
+        //             requestFailed : true
+        //         })
+        //     }
 
         //AJAX request n2
-        fetch(COINMARKETCAP_API_URI)
-            .then(d => d.json())
+        fetch(COINMARKETCAP_API_URI + "/v1/ticker/?limit=10")
+            .then(response => {
+                if(response == ""){
+                    throw Error("Network request failed");
+                }
+                return response.json();
+            })
             .then(d => {
                 this.setState({
                     coinmarketcapData : d
                 })
-            })       
+            }), () => {
+                this.setState({
+                    requestFailed : true
+                })
+            }
+    }
+
+    renderCoins() {
+        return this.state.coinmarketcapData.map(coin => {
+            return (
+                /* When using list you need to specify a key
+                 * attribute that is unique for each list item
+                */
+                <tr>
+                    <td>{coin.rank}</td>
+                    <td>{coin.name}</td>
+                    <td>{coin.symbol}</td>
+                    <td>{coin.price_usd}</td>
+                    <td>{coin.percent_change_1h}</td>
+                    <td>{coin.percent_change_24h}</td>
+                    <td>{coin.percent_change_7d}</td>
+                    <td>{coin.market_cap_usd}</td>
+                </tr>  
+            );
+        })
     }
 
     render() {
+
+        if(!this.state.coinmarketcapData) return <p>Loading</p>
         return (
             <div>
                 <h3>All Coins</h3>
@@ -46,6 +96,7 @@ class CryptoTable extends Component {
                       </tr>
                     </thead>
                     <tbody>
+                        { this.renderCoins() }
                     </tbody>
                   </table>
             </div>

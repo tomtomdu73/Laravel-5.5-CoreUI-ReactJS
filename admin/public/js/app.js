@@ -53640,10 +53640,15 @@ var UPDATE_INTERVAL = 60 * 1000;
 var CryptoTable = function (_Component) {
     _inherits(CryptoTable, _Component);
 
-    function CryptoTable() {
+    function CryptoTable(props) {
         _classCallCheck(this, CryptoTable);
 
-        return _possibleConstructorReturn(this, (CryptoTable.__proto__ || Object.getPrototypeOf(CryptoTable)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (CryptoTable.__proto__ || Object.getPrototypeOf(CryptoTable)).call(this, props));
+
+        _this.state = {
+            requestFailed: false
+        };
+        return _this;
     }
 
     _createClass(CryptoTable, [{
@@ -53652,26 +53657,105 @@ var CryptoTable = function (_Component) {
             var _this2 = this;
 
             //AJAX request n1
-            fetch(CRYPTOCOMPARE_API_URL).then(function (d) {
-                return d.json();
-            }).then(function (d) {
-                _this2.setState({
-                    crytocompareData: d
-                });
-            });
+            // fetch(CRYPTOCOMPARE_API_URL + "/api/data/coinlist")
+            //     .then(response => {
+            //         if(response["Type"] != 100){
+            //             throw Error("Network request failed");
+            //         }
+
+            //         return response.json();
+            //     })
+            //     .then(d => {
+            //         this.setState({
+            //             crytocompareData : d
+            //         });
+            //         console.log(d);
+            //     }), () => {
+            //         this.setState({
+            //             requestFailed : true
+            //         })
+            //     }
 
             //AJAX request n2
-            fetch(COINMARKETCAP_API_URI).then(function (d) {
-                return d.json();
+            fetch(COINMARKETCAP_API_URI + "/v1/ticker/?limit=10").then(function (response) {
+                if (response == "") {
+                    throw Error("Network request failed");
+                }
+                return response.json();
             }).then(function (d) {
                 _this2.setState({
                     coinmarketcapData: d
                 });
+            }), function () {
+                _this2.setState({
+                    requestFailed: true
+                });
+            };
+        }
+    }, {
+        key: 'renderCoins',
+        value: function renderCoins() {
+            return this.state.coinmarketcapData.map(function (coin) {
+                return (
+                    /* When using list you need to specify a key
+                     * attribute that is unique for each list item
+                    */
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'tr',
+                        null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'td',
+                            null,
+                            coin.rank
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'td',
+                            null,
+                            coin.name
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'td',
+                            null,
+                            coin.symbol
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'td',
+                            null,
+                            coin.price_usd
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'td',
+                            null,
+                            coin.percent_change_1h
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'td',
+                            null,
+                            coin.percent_change_24h
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'td',
+                            null,
+                            coin.percent_change_7d
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'td',
+                            null,
+                            coin.market_cap_usd
+                        )
+                    )
+                );
             });
         }
     }, {
         key: 'render',
         value: function render() {
+
+            if (!this.state.coinmarketcapData) return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'p',
+                null,
+                'Loading'
+            );
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
                 null,
@@ -53731,7 +53815,11 @@ var CryptoTable = function (_Component) {
                             )
                         )
                     ),
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('tbody', null)
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'tbody',
+                        null,
+                        this.renderCoins()
+                    )
                 )
             );
         }
