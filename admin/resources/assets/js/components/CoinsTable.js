@@ -19,7 +19,7 @@ class CoinsTable extends Component {
     getCoins(){
         //API call n1
 
-        fetch(COINMARKETCAP_API_URI + "/v1/ticker/?limit=500")
+        fetch(COINMARKETCAP_API_URI + "/v1/ticker/?limit=20")
             .then(response1 => {
                 if(response1 == ""){
                     throw Error("Network request failed");
@@ -65,8 +65,8 @@ class CoinsTable extends Component {
         if(symbol == "MIOTA") symbol = "IOT" ;
 
         try{
-            const img = CRYPTOCOMPARE_API_URL + this.state.crytocompareData[symbol]['ImageUrl']
-
+            const img = CRYPTOCOMPARE_API_URL+this.state.crytocompareData[symbol]['ImageUrl']
+            console.log(img);
             if(!img) throw "No Picture";
             else return img;
             

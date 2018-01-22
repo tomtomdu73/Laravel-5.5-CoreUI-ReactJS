@@ -53661,7 +53661,7 @@ var CoinsTable = function (_Component) {
 
             //API call n1
 
-            fetch(COINMARKETCAP_API_URI + "/v1/ticker/?limit=500").then(function (response1) {
+            fetch(COINMARKETCAP_API_URI + "/v1/ticker/?limit=20").then(function (response1) {
                 if (response1 == "") {
                     throw Error("Network request failed");
                 }
@@ -53708,7 +53708,7 @@ var CoinsTable = function (_Component) {
 
             try {
                 var img = CRYPTOCOMPARE_API_URL + this.state.crytocompareData[symbol]['ImageUrl'];
-
+                console.log(img);
                 if (!img) throw "No Picture";else return img;
             } catch (err) {
                 return err;
