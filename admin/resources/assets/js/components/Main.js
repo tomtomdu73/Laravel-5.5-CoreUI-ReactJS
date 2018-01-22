@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import CryptoTable from './CryptoTable.js';
+import CoinsTable from './CoinsTable.js';
 
 /* An example React component */
 class Main extends Component {
 
     render() {
         return (
-            <CryptoTable></CryptoTable>
+            <CoinsTable></CoinsTable>
         );
     }
 }

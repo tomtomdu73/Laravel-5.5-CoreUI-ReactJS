@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import CoinItem from './CoinItem.js';
  
 const CRYPTOCOMPARE_API_URL = "https://www.cryptocompare.com";
 const COINMARKETCAP_API_URI = "https://api.coinmarketcap.com";
 const UPDATE_INTERVAL = 60*1000;
 
 /* An example React component */
-class CryptoTable extends Component {
+class CoinsTable extends Component {
 
     constructor(props){
         super(props)
@@ -15,35 +16,15 @@ class CryptoTable extends Component {
         }
     }
 
-    componentDidMount(){
+    getCoins(){
+        //API call n1
 
-        //AJAX request n1
-        // fetch(CRYPTOCOMPARE_API_URL + "/api/data/coinlist")
-        //     .then(response => {
-        //         if(response["Type"] != 100){
-        //             throw Error("Network request failed");
-        //         }
-
-        //         return response.json();
-        //     })
-        //     .then(d => {
-        //         this.setState({
-        //             crytocompareData : d
-        //         });
-        //         console.log(d);
-        //     }), () => {
-        //         this.setState({
-        //             requestFailed : true
-        //         })
-        //     }
-
-        //AJAX request n2
-        fetch(COINMARKETCAP_API_URI + "/v1/ticker/?limit=10")
-            .then(response => {
-                if(response == ""){
+        fetch(COINMARKETCAP_API_URI + "/v1/ticker/?limit=500")
+            .then(response1 => {
+                if(response1 == ""){
                     throw Error("Network request failed");
                 }
-                return response.json();
+                return response1.json();
             })
             .then(d => {
                 this.setState({
@@ -53,26 +34,70 @@ class CryptoTable extends Component {
                 this.setState({
                     requestFailed : true
                 })
+            }       
+    }
+
+    getCoinData(){
+        //AJAX request n2
+        fetch(CRYPTOCOMPARE_API_URL + "/api/data/coinlist")
+            .then(response2 => {
+                if(response2.Response == "Success"){
+                    throw Error("Network request failed");
+                }
+
+                return response2.json();
+            })
+            .then(d => {
+                this.setState({
+                    crytocompareData : d.Data
+                });
+                console.log(d);
+            }), () => {
+                this.setState({
+                    requestFailed : true
+                })
             }
     }
 
+    getCoinImage(symbol){
+
+        //Symbol errors 
+        if(symbol == "MIOTA") symbol = "IOT" ;
+
+        try{
+            const img = CRYPTOCOMPARE_API_URL + this.state.crytocompareData[symbol]['ImageUrl']
+
+            if(!img) throw "No Picture";
+            else return img;
+            
+        }
+        catch(err)
+        {
+            return err;
+        }
+      
+    }
+
+    componentDidMount(){
+
+        this.getCoins();
+        this.getCoinData();
+        this.interval = setInterval(this.getCoins.bind(this), UPDATE_INTERVAL);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.interval);
+    }
+
+
     renderCoins() {
+
         return this.state.coinmarketcapData.map(coin => {
-            return (
-                /* When using list you need to specify a key
-                 * attribute that is unique for each list item
-                */
-                <tr>
-                    <td>{coin.rank}</td>
-                    <td>{coin.name}</td>
-                    <td>{coin.symbol}</td>
-                    <td>{coin.price_usd}</td>
-                    <td>{coin.percent_change_1h}</td>
-                    <td>{coin.percent_change_24h}</td>
-                    <td>{coin.percent_change_7d}</td>
-                    <td>{coin.market_cap_usd}</td>
-                </tr>  
-            );
+
+            const symbol = coin.symbol;
+            const img = this.getCoinImage(symbol);
+            return <CoinItem key={coin.name} data = {coin} image = {img} />
+
         })
     }
 
@@ -104,7 +129,7 @@ class CryptoTable extends Component {
     }
 }
  
-export default CryptoTable;
+export default CoinsTable;
  
 /* The if statement is required so as to Render the component on pages that have a div with an ID of "root";  
 */
