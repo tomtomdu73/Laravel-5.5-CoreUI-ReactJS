@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import NumberFormat from 'react-number-format';
 
 /* An example React component */
 class CoinItem  extends Component {
@@ -30,11 +31,11 @@ class CoinItem  extends Component {
                 <td>{this.props.data.rank}</td>
                 <td><img width="15px" src={this.props.image} />  <b>{this.props.data.name}</b></td>
                 <td>{this.props.data.symbol}</td>
-                <td>{this.props.data.price_usd}</td>
+                <td><NumberFormat value={this.props.data.price_usd} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={3}/></td>
                 <td style={{color:this.state.change_1h}}>{this.props.data.percent_change_1h}%</td>
                 <td style={{color:this.state.change_24h}}>{this.props.data.percent_change_24h}%</td>
                 <td style={{color:this.state.change_7d}}>{this.props.data.percent_change_7d}%</td>
-                <td >{this.props.data.market_cap_usd}</td>
+                <td ><NumberFormat value={this.props.data.market_cap_usd} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={0} /></td>
             </tr>  
         );
     }
