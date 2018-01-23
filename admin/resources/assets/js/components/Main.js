@@ -1,13 +1,22 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import { Router, Route, browserHistory, Link } from 'react-router';
+
 import CoinsTable from './CoinsTable.js';
+import CoinDetails from './CoinDetails.js';
 
 /* An example React component */
 class Main extends Component {
 
     render() {
         return (
-            <CoinsTable></CoinsTable>
+        	<Router history={browserHistory}>
+		        <ul className="header">
+		            <li><Link to="/">Home</Link></li>
+		        </ul>        	
+		        <Route path="/" component={CoinsTable}/>
+            	<Route path="/coin/:coinId" component={CoinDetails}/>
+            </Router>
         );
     }
 }

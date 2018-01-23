@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import NumberFormat from 'react-number-format';
+import { Router, Route, Link, browserHistory } from 'react-router';
 
 /* An example React component */
 class CoinItem  extends Component {
@@ -29,7 +30,7 @@ class CoinItem  extends Component {
 
             <tr key={this.props.data.id}>
                 <td>{this.props.data.rank}</td>
-                <td><img width="15px" src={this.props.image} />  <b>{this.props.data.name}</b></td>
+                <td><img width="15px" src={this.props.image} />  <Link to={"/coin/"+this.props.data.id}><b>{this.props.data.name}</b></Link></td>
                 <td>{this.props.data.symbol}</td>
                 <td><NumberFormat value={this.props.data.price_usd} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={3}/></td>
                 <td style={{color:this.state.change_1h}}>{this.props.data.percent_change_1h}%</td>

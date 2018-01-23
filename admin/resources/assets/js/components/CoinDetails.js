@@ -1,26 +1,27 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import CoinItem from './CoinItem.js';
 import { Router, Route, Link, browserHistory } from 'react-router';
- 
+
 const CRYPTOCOMPARE_API_URL = "https://www.cryptocompare.com";
 const COINMARKETCAP_API_URI = "https://api.coinmarketcap.com";
 const UPDATE_INTERVAL = 60*1000;
 
 /* An example React component */
-class CoinsTable extends Component {
+class CoinDetails extends Component {
 
     constructor(props){
+
+
         super(props)
         this.state = {
             requestFailed : false
         }
     }
 
-    getCoins(){
+    getCoin(){
         //API call n1
 
-        fetch(COINMARKETCAP_API_URI + "/v1/ticker/?limit=20")
+        fetch(COINMARKETCAP_API_URI + "/v1/ticker/" + this.props.params.coinId)
             .then(response1 => {
                 if(response1 == ""){
                     throw Error("Network request failed");
@@ -80,57 +81,22 @@ class CoinsTable extends Component {
     }
 
     componentDidMount(){
-        this.getCoins();
+        this.getCoin();
         this.getCoinData();
-        this.interval = setInterval(this.getCoins.bind(this), UPDATE_INTERVAL);
+        this.interval = setInterval(this.getCoin.bind(this), UPDATE_INTERVAL);
     }
 
     componentWillUnmount() {
         clearInterval(this.interval);
     }
 
-
-    renderCoins() {
-
-        if(this.state.coinmarketcapData instanceof Array){
-
-            return this.state.coinmarketcapData.map(coin => {
-
-                const symbol = coin.symbol;
-                const img = this.getCoinImage(symbol);
-                return <CoinItem key={coin.name} data = {coin} image = {img} />
-
-            })
-        }
-    }
-
     render() {
-
-        if(!this.state.coinmarketcapData) return <p>Loading</p>
+        
         return (
-            <div>
-                <h3>All Coins</h3>
-                <table className="table table-hover">
-                    <thead>
-                      <tr>
-                        <td>Rank</td>
-                        <td>Name</td>
-                        <td>Symbol</td>
-                        <td>Price (USD)</td>
-                        <td>1H</td>
-                        <td>1D</td>
-                        <td>1W</td>
-                        <td>Market Cap (USD)</td>
-                      </tr>
-                    </thead>
-                    <tbody>
-                        { this.renderCoins() }
-                    </tbody>
-                  </table>
-            </div>
-        );
+            <span>etrrer</span>
+        )
     }
 }
  
-export default CoinsTable;
+export default CoinDetails;
  
