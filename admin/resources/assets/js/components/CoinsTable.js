@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import CoinItem from './CoinItem.js';
-import { Router, Route, Link, browserHistory } from 'react-router';
+import { Link, browserHistory } from 'react-router';
  
 const CRYPTOCOMPARE_API_URL = "https://www.cryptocompare.com";
 const COINMARKETCAP_API_URI = "https://api.coinmarketcap.com";
@@ -11,10 +11,22 @@ const UPDATE_INTERVAL = 60*1000;
 class CoinsTable extends Component {
 
     constructor(props){
-        super(props)
+        super(props);
         this.state = {
-            requestFailed : false
+            requestFailed : false,
+            coinmarketcapData : [],   
+            crytocompareData : [],           
         }
+    }c
+
+    componentDidMount(){
+        this.getCoins();
+        this.getCoinData();
+        this.interval = setInterval(this.getCoins.bind(this), UPDATE_INTERVAL);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.interval);
     }
 
     getCoins(){
@@ -78,17 +90,6 @@ class CoinsTable extends Component {
         }
       
     }
-
-    componentDidMount(){
-        this.getCoins();
-        this.getCoinData();
-        this.interval = setInterval(this.getCoins.bind(this), UPDATE_INTERVAL);
-    }
-
-    componentWillUnmount() {
-        clearInterval(this.interval);
-    }
-
 
     renderCoins() {
 

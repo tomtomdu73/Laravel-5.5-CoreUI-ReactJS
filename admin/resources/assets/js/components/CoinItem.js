@@ -7,7 +7,7 @@ import { Router, Route, Link, browserHistory } from 'react-router';
 class CoinItem  extends Component {
 
     constructor(props){
-        super(props)
+        super(props);
         this.state = {
             change_1h : "red",
             change_24h : "red",

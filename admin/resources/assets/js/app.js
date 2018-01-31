@@ -1,6 +1,6 @@
 import React from 'react';
-import { Router, Route, browserHistory } from 'react-router';
 import { render } from 'react-dom';
+import { Router, Route, browserHistory } from 'react-router';
 
 /**
  * First we will load all of this project's JavaScript dependencies which

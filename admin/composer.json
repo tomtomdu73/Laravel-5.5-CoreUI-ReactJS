@@ -55,3 +55,21 @@
         "optimize-autoloader": true
     }
 }
+{
+    "type": "package",
+    "package": {
+        "name": "mrholek/CoreUI-Vue",
+        "version": "dev-master",
+        "dist": {
+            "url": "https://github.com/mrholek/CoreUI-Vue/archive/master.zip",
+            "type": "zip"
+        }
+    },
+    "require": {
+        "php": ">=7.0.0",
+        "fideloper/proxy": "~3.3",
+        "laravel/framework": "5.5.*",
+        "laravel/tinker": "~1.0",
+        "mrholek/CoreUI-Vue": "dev-master"
+    }
+}

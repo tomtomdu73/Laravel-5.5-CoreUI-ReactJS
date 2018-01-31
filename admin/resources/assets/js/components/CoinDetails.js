@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, Link, browserHistory } from 'react-router';
+import { Link, browserHistory} from 'react-router';
 
 const CRYPTOCOMPARE_API_URL = "https://www.cryptocompare.com";
 const COINMARKETCAP_API_URI = "https://api.coinmarketcap.com";
@@ -11,11 +11,17 @@ class CoinDetails extends Component {
 
     constructor(props){
 
-
-        super(props)
+        super(props);
         this.state = {
-            requestFailed : false
+            requestFailed : false,
+            coinmarketcapData : null,   
+            crytocompareData : [],
         }
+    }
+
+    componentDidMount(){
+        this.getCoin();
+        this.getCoinData();
     }
 
     getCoin(){
@@ -53,7 +59,6 @@ class CoinDetails extends Component {
                 this.setState({
                     crytocompareData : d.Data
                 });
-                console.log(d);
             }), () => {
                 this.setState({
                     requestFailed : true
@@ -80,20 +85,19 @@ class CoinDetails extends Component {
       
     }
 
-    componentDidMount(){
-        this.getCoin();
-        this.getCoinData();
-        this.interval = setInterval(this.getCoin.bind(this), UPDATE_INTERVAL);
-    }
+   renderCoins2() {
 
-    componentWillUnmount() {
-        clearInterval(this.interval);
+        if(this.state.coinmarketcapData instanceof Array){
+
+           return this.state.coinmarketcapData[0].symbol
+        }
     }
 
     render() {
-        
+        console.log(this.state.coinmarketcapData)
         return (
-            <span>etrrer</span>
+
+            <span><img src={this.getCoinImage(this.renderCoins2())} />{this.props.params.coinId}  et {this.renderCoins2()}</span>
         )
     }
 }
