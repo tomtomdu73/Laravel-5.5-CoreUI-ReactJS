@@ -14,8 +14,6 @@ class CoinDetails extends Component {
         super(props);
         this.state = {
             requestFailed : false,
-            coinmarketcapData : null,   
-            crytocompareData : [],
         }
     }
 
@@ -36,7 +34,7 @@ class CoinDetails extends Component {
             })
             .then(d => {
                 this.setState({
-                    coinmarketcapData : d
+                    coinmarketcapData : d[0]
                 })
             }), () => {
                 this.setState({
@@ -85,19 +83,11 @@ class CoinDetails extends Component {
       
     }
 
-   renderCoins2() {
-
-        if(this.state.coinmarketcapData instanceof Array){
-
-           return this.state.coinmarketcapData[0].symbol
-        }
-    }
-
     render() {
-        console.log(this.state.coinmarketcapData)
+        if(!this.state.coinmarketcapData && !this.state.crytocompareData) return <p>Loading</p>
         return (
 
-            <span><img src={this.getCoinImage(this.renderCoins2())} />{this.props.params.coinId}  et {this.renderCoins2()}</span>
+            <span><img src={this.getCoinImage(this.state.coinmarketcapData.symbol)} />{this.props.params.coinId}  et {this.state.coinmarketcapData.symbol}</span>
         )
     }
 }

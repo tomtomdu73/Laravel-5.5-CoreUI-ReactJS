@@ -59442,7 +59442,7 @@ var CoinsTable = function (_Component) {
         key: 'render',
         value: function render() {
 
-            if (!this.state.coinmarketcapData) return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            if (this.state.coinmarketcapData == "" && this.state.crytocompareData == "") return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'p',
                 null,
                 'Loading'
@@ -60788,9 +60788,7 @@ var CoinDetails = function (_Component) {
         var _this = _possibleConstructorReturn(this, (CoinDetails.__proto__ || Object.getPrototypeOf(CoinDetails)).call(this, props));
 
         _this.state = {
-            requestFailed: false,
-            coinmarketcapData: null,
-            crytocompareData: []
+            requestFailed: false
         };
         return _this;
     }
@@ -60815,7 +60813,7 @@ var CoinDetails = function (_Component) {
                 return response1.json();
             }).then(function (d) {
                 _this2.setState({
-                    coinmarketcapData: d
+                    coinmarketcapData: d[0]
                 });
             }), function () {
                 _this2.setState({
@@ -60863,25 +60861,20 @@ var CoinDetails = function (_Component) {
             }
         }
     }, {
-        key: 'renderCoins2',
-        value: function renderCoins2() {
-
-            if (this.state.coinmarketcapData instanceof Array) {
-
-                return this.state.coinmarketcapData[0].symbol;
-            }
-        }
-    }, {
         key: 'render',
         value: function render() {
-            console.log(this.state.coinmarketcapData);
+            if (!this.state.coinmarketcapData && !this.state.crytocompareData) return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'p',
+                null,
+                'Loading'
+            );
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'span',
                 null,
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: this.getCoinImage(this.renderCoins2()) }),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: this.getCoinImage(this.state.coinmarketcapData.symbol) }),
                 this.props.params.coinId,
                 '  et ',
-                this.renderCoins2()
+                this.state.coinmarketcapData.symbol
             );
         }
     }]);

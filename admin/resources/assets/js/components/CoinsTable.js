@@ -107,7 +107,7 @@ class CoinsTable extends Component {
 
     render() {
 
-        if(!this.state.coinmarketcapData) return <p>Loading</p>
+        if(this.state.coinmarketcapData == "" && this.state.crytocompareData =="") return <p>Loading</p>
         return (
             <div>
                 <h3>All Coins</h3>
