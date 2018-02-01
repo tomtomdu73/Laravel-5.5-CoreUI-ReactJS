@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {HashRouter, Route, Switch} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 // Styles
 // Import Flag Icons Set
@@ -24,7 +24,7 @@ import Page404 from './views/Pages/Page404/'
 import Page500 from './views/Pages/Page500/'
 
 ReactDOM.render((
-  <HashRouter>
+  <Router>
     <Switch>
       <Route exact path="/login" name="Login Page" component={Login}/>
       <Route exact path="/register" name="Register Page" component={Register}/>
@@ -32,5 +32,5 @@ ReactDOM.render((
       <Route exact path="/500" name="Page 500" component={Page500}/>
       <Route path="/" name="Home" component={Full}/>
     </Switch>
-  </HashRouter>
+  </Router>
 ), document.getElementById('root'));
