@@ -1,5 +1,4 @@
 import React from 'react';
-import { render } from 'react-dom';
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -16,6 +15,5 @@ require('./bootstrap');
  */
 
 /* Import the Main component */
-import Index from '../../coreui/src/Index';
-
+require('../../coreui/src/index.js');
 

@@ -17,7 +17,9 @@
     "flag-icon-css": "2.9.0",
     "font-awesome": "4.7.0",
     "history": "4.7.2",
+    "react": "16.2.0",
     "react-chartjs-2": "2.7.0",
+    "react-dom": "16.2.0",
     "react-router-dom": "4.2.2",
     "react-transition-group": "2.2.1",
     "reactstrap": "5.0.0-alpha.4",
@@ -25,9 +27,7 @@
     "cross-env": "^5.1",
     "jquery": "^3.2",
     "laravel-mix": "^1.0",
-    "lodash": "^4.17.4",
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "lodash": "^4.17.4"
   },
   "dependencies": {
     "react-number-format": "^3.1.3"
