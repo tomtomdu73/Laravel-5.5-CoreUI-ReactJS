@@ -153,10 +153,10 @@ Copy the following content to your *webpack.mix.js*:
 ```
 let mix = require('laravel-mix');
 
-// var coreui_vendor = 'vendor/mrholek/CoreUI-React/React_Full_Project';
-// mix.copyDirectory(coreui_vendor + '/public/img', 'public/public/img')
-//     .copyDirectory(coreui_vendor + '/scss', 'resources/coreui/scss')
-//     .copyDirectory(coreui_vendor + '/src', 'resources/coreui/src');
+var coreui_vendor = 'vendor/mrholek/CoreUI-React/React_Full_Project';
+mix.copyDirectory(coreui_vendor + '/public/img', 'public/public/img')
+     .copyDirectory(coreui_vendor + '/scss', 'resources/coreui/scss')
+     .copyDirectory(coreui_vendor + '/src', 'resources/coreui/src');
     
 mix.react('resources/assets/js/app.js', 'public/js')
    .sass('resources/assets/sass/app.scss', 'public/css');     
@@ -345,13 +345,15 @@ ReactDOM.render((
 #### 11. Comment out the CoreUI mix copies
 To avoid overwriting our changes, comment out the copies in *webpack.mix.js*:
 ```
-/*
-// Copy over the CoreUI Assets into separate coreui directories
-var coreui_vendor = 'vendor/mrholek/CoreUI-Vue/Vue_Full_Project';
-mix.copyDirectory(coreui_vendor + '/static/img', 'public/static/img')
-    .copyDirectory(coreui_vendor + '/scss', 'resources/coreui/scss')
-    .copyDirectory(coreui_vendor + '/src', 'resources/coreui/src');
-*/
+let mix = require('laravel-mix');
+
+// var coreui_vendor = 'vendor/mrholek/CoreUI-React/React_Full_Project';
+// mix.copyDirectory(coreui_vendor + '/public/img', 'public/public/img')
+//     .copyDirectory(coreui_vendor + '/scss', 'resources/coreui/scss')
+//     .copyDirectory(coreui_vendor + '/src', 'resources/coreui/src');
+    
+mix.react('resources/assets/js/app.js', 'public/js')
+   .sass('resources/assets/sass/app.scss', 'public/css');    
 ```
 
 #### 12. Run Mix and Serve
