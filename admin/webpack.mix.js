@@ -11,5 +11,10 @@ let mix = require('laravel-mix');
  |
  */
 
+// var coreui_vendor = 'vendor/mrholek/CoreUI-React/React_Full_Project';
+// mix.copyDirectory(coreui_vendor + '/public/img', 'public/public/img')
+//     .copyDirectory(coreui_vendor + '/scss', 'resources/coreui/scss')
+//     .copyDirectory(coreui_vendor + '/src', 'resources/coreui/src');
+    
 mix.react('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css');
+   .sass('resources/assets/sass/app.scss', 'public/css');  
