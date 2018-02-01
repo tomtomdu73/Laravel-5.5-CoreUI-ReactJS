@@ -53,7 +53,7 @@ composer create-project --prefer-dist laravel/laravel CoreUI-ReactJS
 cd CoreUI-ReactJS
 npm install
 ```
-More information regarding requirements can be found [here](https://laravel.com/docs/5.5/installation)
+More information regarding requirements can be found [here](https://laravel.com/docs/5.5/installation). 
 On any fresh Laravel application, you may use the ```preset``` command with the ```react``` option to create a basic scaffold:
 ```
 php artisan preset react
@@ -117,7 +117,7 @@ And then require it:
     "mrholek/CoreUI-React": "dev-master"
 },
 ```
-Run ```composer update``` to add these packages. At this point the CoreUI files should be in ```vendor/mrholek/CoreUI-Vue/```
+Run ```composer update``` to add these packages. At this point the CoreUI files should be in ```vendor/mrholek/CoreUI-React/```
 
 #### 3. Add Dependencies
 In *package.json*, update your devDependencies and dependencies to have the following: 
@@ -302,7 +302,7 @@ $navbar-brand-minimized-logo:         url('/public/img/logo-symbol.png') !defaul
 Now the build should be successful with ```npm run dev``` and the CorUI dashboard should be visible in your localhost.
 
 #### 10. Clean the URL 
-To eliminate those annoying '#' symbols from the browser URL, go to /resource/coreui/src/index.js and use BrowserRouter instead of HashRouter : 
+To eliminate those annoying '#' symbols from the browser URL, go to */resource/coreui/src/index.js* and use BrowserRouter instead of HashRouter : 
 ```
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -343,7 +343,7 @@ ReactDOM.render((
 ```
 
 #### 11. Comment out the CoreUI mix copies
-To avoid overwriting our changes, comment out the copies in webpack.mix.js:
+To avoid overwriting our changes, comment out the copies in *webpack.mix.js*:
 ```
 /*
 // Copy over the CoreUI Assets into separate coreui directories
@@ -367,4 +367,4 @@ php artisan serve
 
 ## Credit
 
-* **Derek Au** - *Thanks for his initila tuto about [CoreUI Vue version](https://github.com/derekphilipau/laravel-5.5-coreui-vue-separated/blob/master/Readme.md)* - [Derek Au](https://github.com/derekphilipau)
+* **Derek Au** - *Thanks for his initial tuto about [CoreUI Vue version](https://github.com/derekphilipau/laravel-5.5-coreui-vue-separated/blob/master/Readme.md)* - [Derek Au](https://github.com/derekphilipau)
