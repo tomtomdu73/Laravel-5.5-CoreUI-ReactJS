@@ -38,8 +38,7 @@
     -->
 </head>
 <body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
-
-<div id="app"></div>
-<script src="{{ mix('js/app.js') }}"></script>
+    <div id="root"></div>
+    <script src="{{ mix('js/app.js') }}"></script>
 </body>
 </html>
