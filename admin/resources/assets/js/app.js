@@ -1,6 +1,5 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { Router, Route, browserHistory } from 'react-router';
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -17,5 +16,5 @@ require('./bootstrap');
  */
 
 /* Import the Main component */
-import Main from './components/Main';
+// import Main from './components/Main';
 

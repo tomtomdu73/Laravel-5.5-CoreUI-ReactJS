@@ -8,7 +8,8 @@
         "php": ">=7.0.0",
         "fideloper/proxy": "~3.3",
         "laravel/framework": "5.5.*",
-        "laravel/tinker": "~1.0"
+        "laravel/tinker": "~1.0",
+        "mrholek/CoreUI-React": "dev-master"
     },
     "require-dev": {
         "filp/whoops": "~2.0",
@@ -53,5 +54,19 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "optimize-autoloader": true
-    }
+    },
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "mrholek/CoreUI-React",
+                "version": "dev-master",
+                "dist": {
+                    "url": "https://github.com/mrholek/CoreUI-React/archive/master.zip",
+                    "type": "zip"
+                }
+
+            }
+        }
+    ]
 }
