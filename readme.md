@@ -3,9 +3,7 @@
 A clean install of Laravel 5.5 with the CoreUI Full Bootstrap Admin Template ReactJS Version in this repo.
 
 ## Contents
-Getting Started
-Install from repository
-Step-by-step Clean Install
+
 1. Install Laravel
 2. Add CoreUI-React repository
 3. Add Dependencies
